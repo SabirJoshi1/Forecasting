@@ -5,28 +5,63 @@ import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error
+st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 
-# Page styling
-st.set_page_config(layout="wide")
 st.markdown("""
     <style>
+        /* Dark theme styling */
+        html, body, [class*="css"]  {
+            background-color: #121212;
+            color: #f0f0f0;
+        }
         .block-container {
             padding-top: 5rem;
+            padding-left: 2rem;
+            padding-right: 2rem;
         }
         .section {
-            border: 1px solid #ccc;
+            border: 1px solid #444;
             padding: 1.5rem;
             margin-bottom: 1.5rem;
             border-radius: 10px;
-            background-color: #f9f9f9;
+            background-color: #1e1e1e;
+        }
+        h1, h2, h3, h4 {
+            color: #00c3ff;
+        }
+        .stButton>button {
+            background-color: #00c3ff;
+            color: white;
+        }
+        .stSelectbox, .stTextInput, .stFileUploader {
+            background-color: #2a2a2a;
+            color: #f0f0f0;
+            border: 1px solid #444;
         }
     </style>
 """, unsafe_allow_html=True)
+
+# Page header
+st.markdown("## 📊 SARS Forecasting Platform")
+
+# Intro section
+st.markdown("""
+<div class="section">
+    <h2>Welcome to the SARS Sales Forecasting Dashboard</h2>
+    <p style="font-size: 16px;">
+        Upload your past year's sales data and harness the power of ARIMAX modeling to predict future sales.
+        This tool helps you make better inventory decisions, minimize stockouts, and improve operational efficiency.
+    </p>
+</div>
+""", unsafe_allow_html=True)
+
 # File uploader
-uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+uploaded_file = st.file_uploader("📁 Upload your Last Year Sales File", type=["csv"])
+
 if not uploaded_file:
-    st.warning("Please upload a CSV file to proceed.")
+    st.warning("⚠️ Please upload a CSV file to proceed.")
     st.stop()
+
 
 # Load data
 @st.cache_data
