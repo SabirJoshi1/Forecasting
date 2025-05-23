@@ -22,16 +22,20 @@ st.markdown("""
         }
     </style>
 """, unsafe_allow_html=True)
+# File uploader
+uploaded_file = st.file_uploader("Upload your CSV file", type=["csv"])
+if not uploaded_file:
+    st.warning("Please upload a CSV file to proceed.")
+    st.stop()
 
 # Load data
 @st.cache_data
-
-def load_data():
-    df = pd.read_csv("C:/Users/joshi/Downloads/sabir.csv", parse_dates=['Date'])
+def load_data(file):
+    df = pd.read_csv(file, parse_dates=['Date'])
     df['Discount'] = df['Discount'].apply(lambda x: 1 if x == 'Yes' else 0)
     return df
 
-raw_df = load_data()
+raw_df = load_data(uploaded_file)
 
 if 'filters_applied' not in st.session_state:
     st.session_state.filters_applied = False
