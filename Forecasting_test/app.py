@@ -10,21 +10,27 @@ st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 st.markdown("""
     <style>
         /* Dark theme styling */
-        html, body, [class*="css"]  {
+        html, body, [class*="css"] {
             background-color: #121212;
             color: #f0f0f0;
         }
         .block-container {
             padding-top: 5rem;
-            padding-left: 2rem;
-            padding-right: 2rem;
+            padding-left: 5%;
+            padding-right: 5%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-        .section {
+        .section, .uploader-box {
             border: 1px solid #444;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 12px;
             background-color: #1e1e1e;
+            width: 80%;
+            text-align: center;
         }
         h1, h2, h3, h4 {
             color: #00c3ff;
@@ -33,35 +39,31 @@ st.markdown("""
             background-color: #00c3ff;
             color: white;
         }
-        .stSelectbox, .stTextInput, .stFileUploader {
-            background-color: #2a2a2a;
-            color: #f0f0f0;
-            border: 1px solid #444;
-        }
     </style>
 """, unsafe_allow_html=True)
 
-# Page header
-st.markdown("## 📊 SARS Forecasting Platform")
+# Centered Main Heading
+st.markdown("<div class='section'><h1>📊 SARS Forecasting Platform</h1></div>", unsafe_allow_html=True)
 
-# Intro section
+# Welcome & Instructions
 st.markdown("""
-<div class="section">
+<div class='section'>
     <h2>Welcome to the SARS Sales Forecasting Dashboard</h2>
     <p style="font-size: 16px;">
-        Upload your past year's sales data and harness the power of ARIMAX modeling to predict future sales.
-        This tool helps you make better inventory decisions, minimize stockouts, and improve operational efficiency.
+        Upload your last year's sales data below to generate actionable sales forecasts using ARIMAX.
+        This platform helps you reduce stockouts, optimize inventory, and improve operational performance.
     </p>
 </div>
 """, unsafe_allow_html=True)
 
-# File uploader
+# Centered File Uploader in a box
+st.markdown("<div class='uploader-box'>", unsafe_allow_html=True)
 uploaded_file = st.file_uploader("📁 Upload your Last Year Sales File", type=["csv"])
+st.markdown("</div>", unsafe_allow_html=True)
 
 if not uploaded_file:
     st.warning("⚠️ Please upload a CSV file to proceed.")
     st.stop()
-
 
 # Load data
 @st.cache_data
