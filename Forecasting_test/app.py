@@ -11,7 +11,7 @@ st.set_page_config(layout="wide")
 st.markdown("""
     <style>
         .block-container {
-            padding-top: 2rem;
+            padding-top: 1rem;
         }
         .section {
             border: 1px solid #ccc;
