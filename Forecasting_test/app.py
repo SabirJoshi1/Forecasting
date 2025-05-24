@@ -10,7 +10,7 @@ st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 st.markdown("""
     <style>
         body {
-            background-image: url('i.jpg');
+            background-image: url('1B.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
