@@ -9,11 +9,20 @@ st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 
 st.markdown("""
     <style>
-        /* Dark theme styling */
+        /* Set background image */
+        body {
+            background-image: url('i.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
         html, body, [class*="css"] {
-            background-color: #121212;
+            background-color: rgba(0, 0, 0, 0.85);
             color: #f0f0f0;
         }
+
         .block-container {
             padding-top: 5rem;
             padding-left: 5%;
@@ -23,24 +32,28 @@ st.markdown("""
             align-items: center;
             justify-content: center;
         }
+
         .section, .uploader-box {
             border: 1px solid #444;
             padding: 2rem;
             margin-bottom: 2rem;
             border-radius: 12px;
-            background-color: #1e1e1e;
+            background-color: rgba(30, 30, 30, 0.9);
             width: 80%;
             text-align: center;
         }
+
         h1, h2, h3, h4 {
             color: #00c3ff;
         }
+
         .stButton>button {
             background-color: #00c3ff;
             color: white;
         }
     </style>
 """, unsafe_allow_html=True)
+
 
 # Centered Main Heading
 st.markdown("<div class='section'><h1>📊 SARS Forecasting Platform</h1></div>", unsafe_allow_html=True)
