@@ -78,17 +78,36 @@ if not uploaded_file:
     st.warning("⚠️ Please upload a CSV file to proceed.")
     st.stop()
 
-# Load data
 @st.cache_data
 def load_data(file):
     df = pd.read_csv(file, parse_dates=['Date'])
     df['Discount'] = df['Discount'].apply(lambda x: 1 if x == 'Yes' else 0)
+    df = df.set_index('Date').asfreq('D').ffill()
     return df
 
-raw_df = load_data(uploaded_file)
+uploaded_file = st.file_uploader("Upload your sales file", type=["csv"])
+if uploaded_file is not None:
+    try:
+        df_check = pd.read_csv(uploaded_file)
+        if 'Date' not in df_check.columns:
+            st.error(f"❌ The uploaded file is missing a 'Date' column. Found columns: {df_check.columns.tolist()}")
+            st.stop()
+        raw_df = load_data(uploaded_file)
 
-if 'filters_applied' not in st.session_state:
-    st.session_state.filters_applied = False
+        # Forecasting preparation
+        latest_year = raw_df.loc[raw_df.index >= raw_df.index.max() - pd.Timedelta(days=365)].copy()
+        latest_year['log_sales'] = np.log1p(latest_year['Sales'])
+
+        log_sales_series = latest_year['log_sales']
+        exog = latest_year[['Holiday', '#Order', 'Discount', 'Store_id']]
+        # Continue with modeling...
+    except Exception as e:
+        st.error(f"❌ Failed to process file: {e}")
+        st.stop()
+else:
+    st.warning("Please upload a CSV file to proceed.")
+    st.stop()
+
 
 # Sidebar filters
 with st.sidebar.expander("🔎 **Filter Parameters**", expanded=True):
