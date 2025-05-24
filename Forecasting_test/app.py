@@ -11,7 +11,7 @@ st.markdown("""
     <style>
         /* Set background image */
         body {
-            background-image: url('i.jpg');
+            background-image: url('mati-flo-nasacf3w97o-unsplash.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
