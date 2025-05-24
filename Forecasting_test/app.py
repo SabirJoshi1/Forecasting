@@ -5,9 +5,10 @@ import matplotlib.pyplot as plt
 import plotly.graph_objs as go
 from statsmodels.tsa.arima.model import ARIMA
 from sklearn.metrics import mean_squared_error
+
 st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 
-st.markdown("""
+st.markdown(f"""
     <style>
         body {
             background-image: url('1B.jpg');
