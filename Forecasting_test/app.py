@@ -8,7 +8,7 @@ from sklearn.metrics import mean_squared_error
 
 st.set_page_config(page_title="SARS Forecasting Platform", layout="wide")
 
-st.markdown(f"""
+st.markdown("""
     <style>
         body {
             background-image: url('1B.jpg');
